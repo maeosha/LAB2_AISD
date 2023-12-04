@@ -161,3 +161,28 @@ void NodeList::delete_all() {
 		this->pop_tail();
 	}
 }
+
+bool NodeList::operator[](const size_t _index) const {
+	Node* tmp_ptr = head;
+	for (size_t index = 0; index < _index; index++) {
+		tmp_ptr = tmp_ptr->get_next();
+	}
+	return tmp_ptr->get_cell();
+}
+
+void NodeList::add_element(size_t _index, bool cell) {
+	Node* tmp_ptr = head;
+	for (size_t index = 0; index < _index - 1; index++) {
+		tmp_ptr = tmp_ptr->get_next();
+	}
+	Node* tmp_node = new Node(cell);
+
+	tmp_node->set_next(tmp_ptr->get_next());
+	tmp_node->set_prev(tmp_ptr);
+
+	tmp_ptr->set_next(tmp_node);
+	tmp_ptr = tmp_ptr->get_next();
+	tmp_ptr = tmp_ptr->get_next();
+	tmp_ptr->set_prev(tmp_node);
+	size++;
+}
