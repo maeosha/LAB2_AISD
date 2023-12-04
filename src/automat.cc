@@ -130,3 +130,23 @@ void NodeList::pop_head() {
 	head = tmp_ptr;
 	size -= 1;
 }
+
+void NodeList::pop_tail() {
+	if (size == 0) {
+		std::cout << "Error!";
+	}
+	if (size == 1) {
+		delete tail;
+		head = tail = nullptr;
+		size -= 1;
+	}
+	else {
+		Node* tmp_ptr = tail;
+		tmp_ptr = tmp_ptr->get_prev();
+		tmp_ptr->set_next(head);
+		(*head).set_prev(tmp_ptr);
+		delete tail;
+		tail = tmp_ptr;
+		size -= 1;
+	}
+}
