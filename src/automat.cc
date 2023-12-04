@@ -65,3 +65,28 @@ Node& NodeList::get_tail() const {
 Node& NodeList::get_head() const {
 	return *head;
 }
+
+void NodeList::push_tail(const bool cell) {
+	if (size == 0) {
+		head = tail = new Node(cell);
+		(*head).set_next(head);
+		(*head).set_prev(head);
+		size += 1;
+	}
+	else {
+		Node* ptr_node = new Node(cell);
+		ptr_node->set_next(head);
+		ptr_node->set_prev(tail);
+		(*head).set_prev(ptr_node);
+		(*tail).set_next(ptr_node);
+		tail = ptr_node;
+		size += 1;
+	}
+}
+
+void NodeList::push_tail(NodeList LinkedList) {
+	for (size_t index = 0; index < LinkedList.get_size(); index++) {
+		bool elem = LinkedList[index];
+		this->push_tail(elem);
+	}
+}
