@@ -195,3 +195,12 @@ void NodeList::operator=(NodeList _list) {
 		this->push_tail(elem);
 	}
 }
+
+std::ostream& operator<<(std::ostream& stream, const NodeList& _list) {
+	stream << "[";
+	for (size_t index = 0; index < _list.get_size(); index++) {
+		stream << _list[index];
+	}
+	stream << "]" << std::endl;
+	return stream;
+}
