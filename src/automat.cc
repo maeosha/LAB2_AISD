@@ -113,3 +113,20 @@ void NodeList::push_head(NodeList LinkedList) {
 		this->push_head(elem);
 	}
 }
+
+void NodeList::pop_head() {
+	if (size == 0) {
+		std::cout << "Error!";
+	}
+	if (size == 1) {
+		delete tail;
+		head = tail = nullptr;
+	}
+	Node* tmp_ptr = head;
+	tmp_ptr = tmp_ptr->get_next();
+	tmp_ptr->set_prev(tail);
+	(*tail).set_next(tmp_ptr);
+	delete head;
+	head = tmp_ptr;
+	size -= 1;
+}
