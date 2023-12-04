@@ -186,3 +186,12 @@ void NodeList::add_element(size_t _index, bool cell) {
 	tmp_ptr->set_prev(tmp_node);
 	size++;
 }
+
+void NodeList::operator=(NodeList _list) {
+	this->delete_all();
+	size_t _list_size = _list.get_size();
+	for (size_t index = 0; index < _list_size; index++) {
+		bool elem = _list[index];
+		this->push_tail(elem);
+	}
+}
