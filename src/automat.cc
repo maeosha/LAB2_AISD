@@ -53,3 +53,15 @@ NodeList::NodeList(const NodeList& _list) {
 		this->push_tail(elem);
 	}
 }
+
+size_t NodeList::get_size() const {
+	return size;
+}
+
+Node& NodeList::get_tail() const {
+	return *tail;
+}
+
+Node& NodeList::get_head() const {
+	return *head;
+}
