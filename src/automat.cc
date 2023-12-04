@@ -90,3 +90,26 @@ void NodeList::push_tail(NodeList LinkedList) {
 		this->push_tail(elem);
 	}
 }
+
+void NodeList::push_head(const bool cell) {
+	if (size == 0) {
+		head = tail = new Node(cell);
+		(*head).set_next(head);
+		(*head).set_prev(head);
+		size += 1;
+	}
+	Node* ptr_node = new Node(cell);
+	ptr_node->set_next(head);
+	ptr_node->set_prev(tail);
+	(*head).set_prev(ptr_node);
+	(*tail).set_next(ptr_node);
+	head = ptr_node;
+	size += 1;
+}
+
+void NodeList::push_head(NodeList LinkedList) {
+	for (size_t index = LinkedList.get_size(); index > 0; index--) {
+		bool elem = LinkedList[index - 1];
+		this->push_head(elem);
+	}
+}
