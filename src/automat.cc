@@ -54,6 +54,10 @@ NodeList::NodeList(const NodeList& _list) {
 	}
 }
 
+NodeList::~NodeList() {
+	this->delete_all();
+}
+
 size_t NodeList::get_size() const {
 	return size;
 }
@@ -148,5 +152,12 @@ void NodeList::pop_tail() {
 		delete tail;
 		tail = tmp_ptr;
 		size -= 1;
+	}
+}
+
+void NodeList::delete_all() {
+	size_t tmp_size = size;
+	for (size_t index = 0; index < tmp_size; index++) {
+		this->pop_tail();
 	}
 }
