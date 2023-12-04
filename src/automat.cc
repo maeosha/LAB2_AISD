@@ -204,3 +204,57 @@ std::ostream& operator<<(std::ostream& stream, const NodeList& _list) {
 	stream << "]" << std::endl;
 	return stream;
 }
+
+bool push_automat_elem(const NodeList& _list, size_t index, int key) {
+	bool p;
+	bool q;
+	bool r;
+	bool elem;
+	if (index == 0) {
+		p = 0;
+		q = _list[index];
+		r = _list[index + 1];
+	}
+	if (index == _list.get_size()) {
+		p = _list[index - 1];
+		q = _list[index];
+		r = 0;
+	}
+	if (index != 0 and index != _list.get_size()) {
+		p = _list[index - 1];
+		q = _list[index];
+		r = _list[index + 1];
+	}
+	if (key == 1) {
+		elem = not(p or q or r);
+	}
+
+	if (key == 2) {
+		elem = not(p) and not(q) and r;
+	}
+	return elem;
+}
+
+
+
+NodeList next_state(NodeList& init_state) {
+	NodeList next_state;
+	int key;
+	int count;
+	bool elem;
+	std::cout << "Choose which slot machine you want to use:\n 1 - Rule 1;\n 2 - Rule 2;" << std::endl;
+	std::cin >> key;
+	std::cout << "Select how many iterations you want to do with the selected rule.\n";
+	std::cin >> count;
+	for (size_t iter = 0; iter < count; iter++) {
+		next_state.delete_all();
+		size_t size = init_state.get_size();
+		for (size_t index = 0; index < size; index++) {
+			elem = push_automat_elem(init_state, index, key);
+			next_state.push_tail(elem);
+		}
+		init_state = next_state;
+		std::cout << next_state;
+	}
+	return next_state;
+}
